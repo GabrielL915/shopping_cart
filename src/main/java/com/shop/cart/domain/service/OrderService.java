@@ -20,4 +20,9 @@ public class OrderService {
     public List<Order> findAll() {
         return repository.findAll();
     }
+
+    public Order findById(String id) {
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("teste"));
+    }
+
 }

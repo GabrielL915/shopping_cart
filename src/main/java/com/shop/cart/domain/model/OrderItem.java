@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -27,14 +28,17 @@ public class OrderItem {
     @Column(name = "id", nullable = false)
     private String id;
 
-    @OneToOne
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
+//    @OneToOne
+//    @JoinColumn(name = "product_id")
+    @Column(name = "product_id")
+    private String product;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false)
-    private Order order;
+//    @ManyToOne
+//    @JoinColumn(name = "order_id")
+    @Column(name = "order_id")
+    private String orderId;
+
 }

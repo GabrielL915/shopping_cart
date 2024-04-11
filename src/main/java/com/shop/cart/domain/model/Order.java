@@ -20,7 +20,7 @@ import lombok.Setter;
 import java.util.Date;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -32,14 +32,15 @@ public class Order {
     @Column(name = "id")
     private String id;
 
-    @Column(name = "date_time", nullable = false)
+    @Column(name = "date_time")
     private Date dateTime;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
-    private Customer customer;
+//    @ManyToOne
+//    @JoinColumn(name = "customer_id", nullable = false)
+    @Column(name = "customer_id")
+    private String customerId;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
+    @Column(name = "status")
     private OrderStatus status;
 }
