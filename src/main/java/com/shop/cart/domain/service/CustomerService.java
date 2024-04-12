@@ -1,5 +1,7 @@
 package com.shop.cart.domain.service;
 
+import com.shop.cart.domain.adapter.Adapter;
+import com.shop.cart.domain.dto.CustomerDTO;
 import com.shop.cart.domain.model.Customer;
 import com.shop.cart.repository.custom.CustomerRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,28 +15,39 @@ public class CustomerService {
 
     private final CustomerRepository repository;
 
-    public Customer create(Customer newCustomer) {
-        return repository.save(newCustomer);
+    private final Adapter<Customer, CustomerDTO> adapter;
+
+    public CustomerDTO create(CustomerDTO customerDTO) {
+        Customer newCustomer = adapter.fromDTO(customerDTO);
+        return getDTOFromEntity(repository.save(newCustomer));
     }
 
-    public List<Customer> findAll() {
-        return repository.findAll();
+    public List<CustomerDTO> findAll() {
+        return repository.findAll().stream().map(this::getDTOFromEntity).toList();
     }
 
-    public Customer findById(String id) {
-        return repository.findById(id).orElseThrow();
+    public CustomerDTO findById(String id) {
+        return getDTOFromEntity(getById(id));
     }
 
-    public Customer update(String id, Customer customer) {
-        Customer existingCustomer = findById(id);
+    public CustomerDTO update(String id, CustomerDTO customerDTO) {
+        Customer existingCustomer = getById(id);
 
-        existingCustomer.setName(customer.getName());
-        existingCustomer.setEmail(customer.getEmail());
+        existingCustomer.setName(customerDTO.name());
+        existingCustomer.setEmail(customerDTO.email());
 
-        return repository.save(existingCustomer);
+        return getDTOFromEntity(repository.save(existingCustomer));
     }
 
     public void deleteById(String id) {
         repository.deleteById(id);
+    }
+
+    private CustomerDTO getDTOFromEntity(Customer customer) {
+        return adapter.fromEntity(customer);
+    }
+
+    private Customer getById(String id) {
+        return repository.findById(id).orElseThrow();
     }
 }
