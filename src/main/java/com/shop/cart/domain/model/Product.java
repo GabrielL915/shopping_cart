@@ -29,4 +29,9 @@ public class Product {
 
     @Column(name = "price", nullable = false)
     private Double price;
+
+    public Product(String name, Double price) {
+        this.name = name;
+        this.price = price;
+    }
 }

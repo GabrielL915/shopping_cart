@@ -1,7 +1,9 @@
 package com.shop.cart.controller;
 
+import com.shop.cart.domain.dto.ProductDTO;
 import com.shop.cart.domain.model.Product;
 import com.shop.cart.domain.service.ProductService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,23 +29,23 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Product create(@RequestBody Product product) {
+    public ProductDTO create(@RequestBody @Valid ProductDTO product) {
         return service.create(product);
     }
 
     @GetMapping
-    public List<Product> getAll() {
+    public List<ProductDTO> getAll() {
         return service.findAll();
     }
 
     @GetMapping(ID_PATH_VARIABLE)
-    public Product getById(@PathVariable String id) {
+    public ProductDTO getById(@PathVariable String id) {
         return service.findById(id);
     }
 
     @PutMapping(ID_PATH_VARIABLE)
     @ResponseStatus(value = HttpStatus.OK)
-    public Product update(@PathVariable String id, @RequestBody Product product) {
+    public ProductDTO update(@PathVariable String id, @RequestBody @Valid ProductDTO product) {
         return service.update(id, product);
     }
 
