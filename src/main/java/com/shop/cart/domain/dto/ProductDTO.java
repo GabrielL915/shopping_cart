@@ -11,7 +11,6 @@ public record ProductDTO(
         @NotBlank(message = "Name cannot be null")
         String name,
 
-        @NotBlank(message = "Price cannot be null")
         Double price
 ) {
 }

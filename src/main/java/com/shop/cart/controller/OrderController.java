@@ -1,7 +1,7 @@
 package com.shop.cart.controller;
 
 import com.shop.cart.domain.dto.OrderDTO;
-import com.shop.cart.domain.model.Order;
+import com.shop.cart.domain.dto.OrderItemDTO;
 import com.shop.cart.domain.model.OrderItem;
 import com.shop.cart.domain.service.OrderItemService;
 import com.shop.cart.domain.service.OrderService;
@@ -41,12 +41,12 @@ public class OrderController {
 
     @PostMapping(path = "/orderItem")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public OrderItem addOrderToOrderItem(@RequestBody OrderItem newOrderItem) {
-        return orderItemService.addOrderItemToOrder(newOrderItem.getOrderId(), newOrderItem);
+    public OrderItemDTO addOrderToOrderItem(@RequestBody OrderItemDTO orderItemDTO) {
+        return orderItemService.addOrderItemToOrder(orderItemDTO);
     }
 
     @GetMapping(ID_PATH_VARIABLE)
-    public List<OrderItem> getAllOrderItemByOrderId(@PathVariable String orderId) {
+    public List<OrderItemDTO> getAllOrderItemByOrderId(@PathVariable String orderId) {
         return orderItemService.findByOrderId(orderId);
     }
 }
