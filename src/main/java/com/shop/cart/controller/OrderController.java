@@ -1,5 +1,6 @@
 package com.shop.cart.controller;
 
+import com.shop.cart.domain.dto.OrderDTO;
 import com.shop.cart.domain.model.Order;
 import com.shop.cart.domain.model.OrderItem;
 import com.shop.cart.domain.service.OrderItemService;
@@ -28,12 +29,12 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Order create(@RequestBody Order newOrder) {
-        return service.create(newOrder);
+    public OrderDTO create(@RequestBody OrderDTO orderDTO) {
+        return service.create(orderDTO);
     }
 
     @GetMapping
-    public List<Order> getAll() {
+    public List<OrderDTO> getAll() {
         return service.findAll();
     }
 

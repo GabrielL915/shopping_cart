@@ -17,7 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "orders")
@@ -32,15 +32,20 @@ public class Order {
     @Column(name = "id")
     private String id;
 
-    @Column(name = "date_time")
-    private Date dateTime;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
-//    @ManyToOne
-//    @JoinColumn(name = "customer_id", nullable = false)
-    @Column(name = "customer_id")
-    private String customerId;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private OrderStatus status;
+
+    public Order(Customer customer, LocalDateTime createdAt, OrderStatus status) {
+        this.customer = customer;
+        this.createdAt = createdAt;
+        this.status = status;
+    }
 }

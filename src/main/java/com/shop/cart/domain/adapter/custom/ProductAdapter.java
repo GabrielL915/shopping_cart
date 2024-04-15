@@ -3,7 +3,9 @@ package com.shop.cart.domain.adapter.custom;
 import com.shop.cart.domain.adapter.Adapter;
 import com.shop.cart.domain.dto.ProductDTO;
 import com.shop.cart.domain.model.Product;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProductAdapter implements Adapter<Product, ProductDTO> {
     @Override
     public Product fromDTO(ProductDTO productDTO) {
