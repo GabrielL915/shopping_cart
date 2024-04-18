@@ -15,6 +15,7 @@ import java.util.List;
 public class OrderService {
 
     private final OrderRepository repository;
+    private final CustomerService customerService;
     private final Adapter<Order, OrderDTO> adapter;
 
     public OrderDTO create(OrderDTO orderDTO) {

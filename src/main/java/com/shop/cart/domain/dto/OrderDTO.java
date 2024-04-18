@@ -11,12 +11,14 @@ public record OrderDTO(
 
         @UUID
         String id,
+
         @Timestamp
         LocalDateTime createdAt,
-        @NotBlank(message = "Customer id cannot be null")
+
+        @NotBlank(message = "Customer id cannot be blank")
         String customerId,
 
-        @NotBlank(message = "Status cannot be null")
+        @NotBlank(message = "Status cannot be blank")
         OrderStatus status
 ) {
 }

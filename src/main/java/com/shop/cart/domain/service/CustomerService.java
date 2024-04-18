@@ -50,4 +50,8 @@ public class CustomerService {
     private Customer getById(String id) {
         return repository.findById(id).orElseThrow();
     }
+
+    public Customer getReferenceById(String id) {
+        return repository.getReferenceById(id);
+    }
 }
